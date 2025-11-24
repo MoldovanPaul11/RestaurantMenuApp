@@ -1,0 +1,400 @@
+════════════════════════════════════════════════════════════════════════════════
+                   RESTAURANT MENU PROJECT - COMPLETE DOCUMENTATION
+                              Iterations 1-4 (ALL REQUIREMENTS)
+════════════════════════════════════════════════════════════════════════════════
+
+PROJECT OVERVIEW
+================
+Restaurant "La Andrei" - Menu Management System with advanced features
+Total Score: Iterations 1-4
+Status: COMPLETE - All requirements implemented
+
+════════════════════════════════════════════════════════════════════════════════
+
+ITERATION 1: BASIC MENU DISPLAY
+================================
+
+Objective: Display restaurant menu with product details
+
+Implementation:
+- Abstract class Produs (base for all products)
+- Mancare class (food items with weight in grams)
+- Bautura class (beverages with volume in ml and alcohol flag)
+- Meniu class (manages list of products)
+
+Classes Created:
+- Produs.java (abstract with getSpecificDetails())
+- Mancare.java (final, implements food details)
+- Bautura.java (final, implements beverage details)
+- Meniu.java (manages product list)
+
+Features:
+✓ Type-safe product management
+✓ Polymorphic toString() display
+✓ Product-specific details (weight/volume)
+
+════════════════════════════════════════════════════════════════════════════════
+
+ITERATION 2: ORDER MANAGEMENT SYSTEM
+=====================================
+
+Objective: Implement order system with discount strategies
+
+Implementation:
+- Order class manages list of products with quantities
+- OrderItem class represents individual order entries
+- Strategy Pattern for discount implementations
+- VAT (9%) automatically calculated
+
+Classes Used:
+- Order.java (manages order with discounts and VAT)
+- OrderItem.java (individual items in order)
+- DiscountStrat.java (interface for discount strategies)
+- HappyHour.java (20% discount on alcoholic beverages)
+- PercentageDiscount.java (percentage discount on whole order)
+
+Features:
+✓ Add multiple products with quantities
+✓ Apply flexible discount strategies
+✓ Automatic VAT calculation
+✓ Receipt generation with detailed breakdown
+
+════════════════════════════════════════════════════════════════════════════════
+
+ITERATION 3: ADVANCED MENU & QUERIES
+================================================
+
+Objective: Organize menu by categories and implement complex queries
+
+Part 1: Menu Organization by Categories (0.5p)
+-------------------------------------------------
+Requirement: Structure menu into categories: Aperitiv, Fel Principal, Desert, etc.
+
+Implementation:
+- Added Map<String, List<Produs>> to Meniu class
+- Methods:
+  - addProduct(Produs product, String category)
+  - getProductsByCategory(String category)
+  - getCategories()
+  - displayMenuByCategory()
+
+Categories Created:
+✓ Aperitiv: Salată Caesar
+✓ Fel Principal: Pizza Margherita, Paste Carbonara, Risotto Vegetarian
+✓ Desert: Tiramisu Premium, Mousse Ciocolată, Cheesecake
+✓ Băuturi Răcoritoare: Limonada, Apa Plata, Coca Cola
+✓ Băuturi Alcoolice: Bere Ursus, Vin Roșu, Whisky
+
+Part 2: Complex Queries with Streams API (0.6p)
+---------------------------------------------------
+Three specific queries required:
+
+Query 1 (0.2p): "Care sunt toate preparatele vegetariene, sortate alfabetic?"
+- Method: getVegetarianFoodsSortedAlphabetically()
+- Implementation: stream().filter().map().sorted()
+- Returns: All Mancare products sorted A-Z
+- Result: Cheesecake, Mousse Ciocolată, Pizza Margherita, Risotto Vegetarian, Salată Caesar, Tiramisu Premium
+
+Query 2 (0.2p): "Care este prețul mediu al deserturilor?"
+- Method: getAveragePriceForCategory("Desert")
+- Implementation: stream().mapToDouble().average()
+- Calculation: (125 + 35 + 45) / 3 = 68.33 RON
+- Returns: Double average price
+
+Query 3 (0.2p): "Avem vreun preparat care costă mai mult de 100 RON?"
+- Method: hasProductAbovePrice(100.0)
+- Implementation: stream().anyMatch()
+- Result: YES - Tiramisu Premium (125 RON)
+- Returns: Boolean (true/false)
+
+Part 3: Safe Search in Menu (0.4p)
+------------------------------------
+Requirement: Implement safe search that returns Optional<Produs>
+
+Implementation:
+- Method: findProductSafely(String name)
+- Uses: Optional pattern instead of null checks
+- Features:
+  - No NullPointerException risk
+  - Case-insensitive search
+  - Uses ifPresentOrElse() for handling
+
+Example Usage:
+  menu.findProductSafely("Pizza Margherita")
+      .ifPresentOrElse(
+          product -> System.out.println("FOUND: " + product),
+          () -> System.out.println("NOT FOUND")
+      );
+
+Part 4: Pizza Customizable - Builder Pattern (0.5p)
+------------------------------------------------------
+Requirement: Create Pizza class with Builder Pattern for customization
+
+Pizza Class Features:
+- Extends Produs (follows hierarchy)
+- Mandatory parameters: name, price, dough (blat), sauce (sos)
+- Optional parameters: toppings (List<String>)
+- Full validation in constructor (IllegalArgumentException)
+
+PizzaBuilder Features:
+- Fluent interface (methods return 'this')
+- addTopping(String) - add single topping
+- addToppings(String...) - add multiple toppings
+- build() - creates immutable Pizza object
+
+Validation:
+✓ Name cannot be empty
+✓ Price must be > 0
+✓ Dough type required
+✓ Sauce type required
+✓ Toppings are optional (0 to N)
+
+Examples:
+1. Simple Pizza (30 RON) - blat subțire, sos roșu
+2. Deluxe Pizza (55 RON) - 5 toppings
+3. Vegetarian Pizza (40 RON) - 4 toppings
+4. Custom orders with discounts
+
+════════════════════════════════════════════════════════════════════════════════
+
+ITERATION 4: CONFIGURATION & JSON EXPORT
+==========================================
+
+Objective: Externalize configuration and implement JSON export
+
+Part 1: External Configuration (0.5p)
+---------------------------------------
+Requirement: Load configuration from external JSON file
+
+config.json Structure:
+{
+  "restaurant": {
+    "name": "La Andrei",
+    "address": "Strada Principale, Nr. 42, Bucuresti",
+    "phone": "0212-345-6789",
+    "email": "contact@la-andrei.ro",
+    "currency": "RON"
+  },
+  "tax": {
+    "vat_rate": 0.09,
+    "vat_description": "TVA 9%"
+  },
+  "settings": {
+    "max_toppings": 10,
+    "min_order_value": 0.0,
+    "delivery_fee": 5.0
+  }
+}
+
+Config Class (Singleton Pattern):
+- getInstance() - returns single instance
+- loadConfig() - reads from config.json
+- parseConfig() - extracts values
+- loadDefaultConfig() - fallback if file not found
+
+Error Handling:
+✓ FileNotFoundException - file missing → use defaults
+✓ IOException - read error → use defaults
+✓ Parsing errors → use defaults with warning
+
+Part 2: Robust Error Handling (0.5p)
+--------------------------------------
+Requirement: Handle two types of errors with clear messages
+
+Error Types Handled:
+
+1. FileNotFoundException:
+   - Message: "Fișierul config.json nu a fost găsit!"
+   - Action: Load default configuration
+   - User gets clear location hint
+
+2. IOException:
+   - Message: "Problemă la citirea fișierului config.json!"
+   - Action: Load default configuration
+   - User gets error details
+
+Error Stack Trace Display:
+✓ Clear error message
+✓ Detailed explanation
+✓ Friendly user message (not "crape")
+✓ Fallback behavior (continues with defaults)
+✓ Logging with timestamps possible
+
+Part 3: JSON Export Functionality (0.5p)
+-----------------------------------------
+Requirement: Export menu to JSON file
+
+Method: menu.exportToJSON(String filename)
+
+Implementation:
+- Manually constructs JSON string (no external library needed)
+- Writes to file using FileWriter
+- Handles IOException gracefully
+
+JSON Output Structure:
+{
+  "restaurant": "La Andrei",
+  "total_products": 12,
+  "categories": 5,
+  "menu": {
+    "Aperitiv": [
+      {
+        "name": "Salată Caesar",
+        "price": 28.0,
+        "details": "Gramaj: 300g"
+      }
+    ],
+    "Fel Principal": [...],
+    "Desert": [...],
+    etc.
+  }
+}
+
+Error Handling:
+✓ IOException - file write error → error message
+✓ Catches and reports errors clearly
+✓ Continues execution (no crash)
+✓ User informed of success/failure
+
+════════════════════════════════════════════════════════════════════════════════
+
+DESIGN PATTERNS USED
+====================
+
+1. Builder Pattern (Pizza)
+   - PizzaBuilder inner class
+   - Fluent interface for object construction
+   - Mandatory parameters enforced
+   - Optional toppings support
+
+2. Strategy Pattern (Discounts)
+   - DiscountStrat interface
+   - HappyHour implementation
+   - PercentageDiscount implementation
+   - Runtime strategy selection
+
+3. Singleton Pattern (Config)
+   - getInstance() returns single instance
+   - Thread-safe lazy initialization
+   - Centralized configuration management
+
+4. Stream API Pattern (Queries)
+   - Functional programming approach
+   - Lazy evaluation
+   - Composable operations
+
+════════════════════════════════════════════════════════════════════════════════
+
+JSON EXPLANATION FOR BEGINNERS
+===============================
+
+What is JSON?
+JSON (JavaScript Object Notation) is a human-readable text format for data.
+
+JSON Structure:
+- Objects: {key: value, key: value}
+- Arrays: [item1, item2, item3]
+- Values: string "text", number 123, boolean true, null, object {}, array []
+
+Example:
+{
+  "name": "Pizza",          ← string value
+  "price": 45.0,           ← number value
+  "in_stock": true,        ← boolean value
+  "toppings": [            ← array
+    "Mozzarella",
+    "Tomato"
+  ]
+}
+
+Why JSON?
+✓ Human-readable format
+✓ Easy to parse programmatically
+✓ Web standard (APIs use JSON)
+✓ Language-independent
+✓ Lightweight compared to XML
+
+Config.json Purpose:
+- Stores configuration externally (not in code)
+- Easy to modify without recompiling
+- Can be changed by non-programmers
+- Allows different configs for dev/prod
+
+Export JSON Purpose:
+- Share menu data with other systems
+- Display menu on website/app
+- Integration with external services
+- Data backup and archival
+- Analytics and reporting
+
+════════════════════════════════════════════════════════════════════════════════
+
+COMPILATION & EXECUTION
+=======================
+
+Compile Command:
+  javac -encoding UTF-8 -target 11 -source 11 -d "out/production/Resturant MiP" src\*.java
+
+Run Command:
+  java -cp "out/production/Resturant MiP" RestaurantApp
+
+Output Files:
+  - meniu_export.json (generated by export functionality)
+
+════════════════════════════════════════════════════════════════════════════════
+
+PROJECT FILES STRUCTURE
+=======================
+
+Source Code (src/):
+✓ Produs.java - Abstract base class
+✓ Mancare.java - Food products
+✓ Bautura.java - Beverages
+✓ Pizza.java - Customizable pizza (Iteration 3)
+✓ Meniu.java - Menu management (Iterations 1-4)
+✓ Order.java - Order system (Iteration 2)
+✓ OrderItem.java - Order items (Iteration 2)
+✓ DiscountStrat.java - Discount interface (Iteration 2)
+✓ HappyHour.java - Happy hour discount (Iteration 2)
+✓ PercentageDiscount.java - Percentage discount (Iteration 2)
+✓ Config.java - Configuration management (Iteration 4)
+✓ RestaurantApp.java - Main application (all iterations)
+
+Configuration:
+✓ config.json - External configuration file (Iteration 4)
+
+════════════════════════════════════════════════════════════════════════════════
+
+FEATURES SUMMARY
+================
+
+Iteration 1:
+✓ Product hierarchy (abstract Produs)
+✓ Food and beverage types
+✓ Menu display
+
+Iteration 2:
+✓ Order system
+✓ Discount strategies
+✓ VAT calculation
+✓ Receipt generation
+
+Iteration 3:
+✓ Category organization
+✓ Complex Streams queries
+✓ Safe search (Optional pattern)
+✓ Pizza builder pattern
+
+Iteration 4:
+✓ External configuration
+✓ Error handling (try-catch)
+✓ JSON export
+✓ File I/O operations
+
+════════════════════════════════════════════════════════════════════════════════
+
+TOTAL SCORE: Complete Implementation
+Status: ✅ READY FOR SUBMISSION
+
+════════════════════════════════════════════════════════════════════════════════
+

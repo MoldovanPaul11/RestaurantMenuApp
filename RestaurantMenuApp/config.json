@@ -1,0 +1,19 @@
+{
+  "restaurant": {
+    "name": "La Andrei",
+    "address": "Strada Principale, Nr. 42, Bucuresti",
+    "phone": "0212-345-6789",
+    "email": "contact@la-andrei.ro",
+    "currency": "RON"
+  },
+  "tax": {
+    "vat_rate": 0.09,
+    "vat_description": "TVA 9%"
+  },
+  "settings": {
+    "max_toppings": 10,
+    "min_order_value": 0.0,
+    "delivery_fee": 5.0
+  }
+}
+

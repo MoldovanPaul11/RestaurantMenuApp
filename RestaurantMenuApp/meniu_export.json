@@ -1,0 +1,140 @@
+{
+  "restaurant" : "La Andrei",
+  "total_products" : 32,
+  "categories" : 5,
+  "menu" : {
+    "Aperitiv" : [ {
+      "name" : "Salată Caesar",
+      "price" : 28.0,
+      "details" : "Gramaj: 300g"
+    }, {
+      "name" : "Salată Grecească",
+      "price" : 32.0,
+      "details" : "Gramaj: 350g"
+    }, {
+      "name" : "Bruschetta",
+      "price" : 25.0,
+      "details" : "Gramaj: 250g"
+    }, {
+      "name" : "Calamari Prăjiți",
+      "price" : 40.0,
+      "details" : "Gramaj: 280g"
+    } ],
+    "Desert" : [ {
+      "name" : "Tiramisu Premium",
+      "price" : 125.0,
+      "details" : "Gramaj: 250g"
+    }, {
+      "name" : "Mousse Ciocolată",
+      "price" : 35.0,
+      "details" : "Gramaj: 200g"
+    }, {
+      "name" : "Cheesecake",
+      "price" : 45.0,
+      "details" : "Gramaj: 180g"
+    }, {
+      "name" : "Profiterol",
+      "price" : 38.0,
+      "details" : "Gramaj: 220g"
+    }, {
+      "name" : "Pannacotta",
+      "price" : 42.0,
+      "details" : "Gramaj: 210g"
+    }, {
+      "name" : "Crème Brûlée",
+      "price" : 48.0,
+      "details" : "Gramaj: 190g"
+    }, {
+      "name" : "Tort Zmeura",
+      "price" : 55.0,
+      "details" : "Gramaj: 240g"
+    } ],
+    "Băuturi Alcoolice" : [ {
+      "name" : "Bere Ursus",
+      "price" : 12.0,
+      "details" : "Volum: 500ml"
+    }, {
+      "name" : "Vin Rosu (pahar)",
+      "price" : 18.0,
+      "details" : "Volum: 200ml"
+    }, {
+      "name" : "Whisky",
+      "price" : 35.0,
+      "details" : "Volum: 50ml"
+    }, {
+      "name" : "Vin Alb (pahar)",
+      "price" : 16.0,
+      "details" : "Volum: 200ml"
+    }, {
+      "name" : "Bere Heineken",
+      "price" : 13.0,
+      "details" : "Volum: 500ml"
+    }, {
+      "name" : "Vodka",
+      "price" : 38.0,
+      "details" : "Volum: 50ml"
+    }, {
+      "name" : "Rom Bacardi",
+      "price" : 35.0,
+      "details" : "Volum: 50ml"
+    } ],
+    "Băuturi Răcoritoare" : [ {
+      "name" : "Limonada",
+      "price" : 15.0,
+      "details" : "Volum: 400ml"
+    }, {
+      "name" : "Apa Plata",
+      "price" : 8.0,
+      "details" : "Volum: 500ml"
+    }, {
+      "name" : "Coca Cola",
+      "price" : 10.0,
+      "details" : "Volum: 330ml"
+    }, {
+      "name" : "Suc Portocală",
+      "price" : 12.0,
+      "details" : "Volum: 250ml"
+    }, {
+      "name" : "Suc Măr",
+      "price" : 12.0,
+      "details" : "Volum: 250ml"
+    }, {
+      "name" : "Apă Minerală",
+      "price" : 9.0,
+      "details" : "Volum: 500ml"
+    }, {
+      "name" : "Limonadă Zmeură",
+      "price" : 16.0,
+      "details" : "Volum: 400ml"
+    } ],
+    "Fel Principal" : [ {
+      "name" : "Pizza Margherita",
+      "price" : 45.0,
+      "details" : "Gramaj: 450g"
+    }, {
+      "name" : "Paste Carbonara",
+      "price" : 52.5,
+      "details" : "Gramaj: 400g"
+    }, {
+      "name" : "Risotto Vegetarian",
+      "price" : 48.0,
+      "details" : "Gramaj: 350g"
+    }, {
+      "name" : "Broccoli cu Sos Cheddar",
+      "price" : 42.0,
+      "details" : "Gramaj: 380g"
+    }, {
+      "name" : "File de Pește",
+      "price" : 60.0,
+      "details" : "Gramaj: 320g"
+    }, {
+      "name" : "Meniu Vegan",
+      "price" : 50.0,
+      "details" : "Gramaj: 400g"
+    }, {
+      "name" : "Entrecôte",
+      "price" : 75.0,
+      "details" : "Gramaj: 350g"
+    } ]
+  }
+}
